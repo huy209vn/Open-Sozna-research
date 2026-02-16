@@ -73,12 +73,12 @@ const recentEntries = sortedEntries.slice(0, 5);
           <li>
             <a 
               href={activeTag ? `/Open-Sozna-research/tags/${activeTag}/${entry.slug}` : `/Open-Sozna-research/entries/${entry.slug}`} 
-              class={`block group ${currentSlug === entry.slug ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+              class={`block group ${currentSlug === entry.slug ? 'opacity-100' : 'opacity-90 hover:opacity-100'}`}
             >
               <span class={`block text-sm font-medium transition-colors ${currentSlug === entry.slug ? 'text-sozna-accent' : 'text-sozna-text group-hover:text-sozna-heading'}`}>
                 {entry.data.title}
               </span>
-              <span class="block text-xs text-zinc-500 mt-0.5 font-sans">
+              <span class="block text-xs text-zinc-400 mt-0.5 font-sans">
                 {entry.data.date.toISOString().split('T')[0]}
               </span>
             </a>
