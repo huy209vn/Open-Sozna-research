@@ -58,7 +58,40 @@ The sidebar shows:
 - Recent entries (up to 5)
 - A link to view all entries
 
-## 4. Mathematics (LaTeX)
+## 4. Concept Dropdowns
+
+You can embed reusable concept explanations in any entry using the `:::concept` directive:
+
+```markdown
+This relates to the idea of dynamical systems.
+
+:::concept{name="dynamical-system"}
+:::
+
+Continuing with the main text...
+```
+
+### How it works:
+1. Create a concept file in `src/content/concepts/` (e.g., `manifold.md`)
+2. Use frontmatter with a `title` field
+3. Reference it in any entry with `:::concept{name="manifold"}`
+4. The dropdown shows the concept title, expands to reveal the full explanation
+5. Concepts support LaTeX math just like entries
+
+### Example concept file (`src/content/concepts/manifold.md`):
+```markdown
+---
+title: "Manifold"
+---
+
+A **manifold** is a topological space that locally resembles Euclidean space near each point.
+
+An $n$-dimensional manifold satisfies...
+```
+
+Concepts are shared across entries — define once, reference anywhere.
+
+## 5. Mathematics (LaTeX)
 
 The site supports LaTeX math rendering via KaTeX.
 
@@ -80,7 +113,7 @@ Wrap equations in double dollar signs `$$` for a centered block.
 
 *   **Output:** (Renders a centered equation)
 
-## 5. Code Blocks
+## 6. Code Blocks
 Syntax highlighting is enabled by default. Use triple backticks with the language name.
 
 ```python
@@ -88,7 +121,7 @@ def consciousness(self):
     return self.qualia
 ```
 
-## 6. Managing Tags
+## 7. Managing Tags
 
 Tags are dynamic. You do not need to "create" a tag anywhere else.
 *   Simply adding `tags: ["new-topic"]` to an entry will automatically:
@@ -96,7 +129,7 @@ Tags are dynamic. You do not need to "create" a tag anywhere else.
     2.  Create a dedicated page at `/tags/new-topic`.
     3.  Group all entries with this tag together.
 
-## 7. Previewing Locally
+## 8. Previewing Locally
 
 To see your changes as you write:
 

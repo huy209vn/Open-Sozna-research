@@ -1,6 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import Layout from '../../../layouts/Layout.astro';
+import { marked } from 'marked';
 
 export async function getStaticPaths() {
   const allEntries = await getCollection('entries');
@@ -15,16 +16,48 @@ export async function getStaticPaths() {
       props: { 
         tag,
         entry,
-        // In tag context
-        nextEntry: index > 0 ? sortedEntries[index - 1] : null, // Newer
-        prevEntry: index < sortedEntries.length - 1 ? sortedEntries[index + 1] : null, // Older
+        nextEntry: index > 0 ? sortedEntries[index - 1] : null,
+        prevEntry: index < sortedEntries.length - 1 ? sortedEntries[index + 1] : null,
       },
     }));
   });
 }
 
 const { tag, entry, nextEntry, prevEntry } = Astro.props;
-const { Content } = await entry.render();
+
+// Get all concepts
+const allConcepts = await getCollection('concepts');
+const conceptRenderMap = new Map();
+
+for (const concept of allConcepts) {
+  const { Content } = await render(concept);
+  conceptRenderMap.set(concept.slug, { title: concept.data.title, Content });
+}
+
+// Parse content with concepts
+const rawContent = entry.body;
+const conceptRegex = /:::\s*concept\s*\{\s*name\s*=\s*["']([^"']+)["']\s*\}\s*:::/g;
+
+const segments = [];
+let lastIndex = 0;
+let match;
+
+while ((match = conceptRegex.exec(rawContent)) !== null) {
+  if (match.index > lastIndex) {
+    const textContent = rawContent.slice(lastIndex, match.index);
+    const html = marked.parse(textContent);
+    segments.push({ type: 'html', content: html });
+  }
+  
+  segments.push({ type: 'concept', name: match[1] });
+  lastIndex = conceptRegex.lastIndex;
+}
+
+if (lastIndex < rawContent.length) {
+  const textContent = rawContent.slice(lastIndex);
+  const html = marked.parse(textContent);
+  segments.push({ type: 'html', content: html });
+}
 ---
 
 <Layout title={`${tag} | ${entry.data.title}`} currentSlug={entry.slug} activeTag={tag}>
@@ -54,7 +87,48 @@ const { Content } = await entry.render();
   </header>
 
   <article class="prose prose-invert prose-lg max-w-none font-serif">
-    <Content />
+    {segments.map((segment) => {
+      if (segment.type === 'html') {
+        return <Fragment set:html={segment.content} />;
+      }
+      
+      if (segment.type === 'concept') {
+        const concept = conceptRenderMap.get(segment.name);
+        if (!concept) {
+          return (
+            <div class="my-4 p-4 border border-red-700/50 rounded bg-red-900/20 text-red-400 text-sm">
+              Concept "{segment.name}" not found
+            </div>
+          );
+        }
+        
+        const ConceptContent = concept.Content;
+        return (
+          <details class="concept-dropdown my-6 group border border-zinc-700/50 rounded-md p-3 bg-zinc-800/30">
+            <summary class="concept-summary cursor-pointer list-none">
+              <span class="concept-label inline-flex items-center gap-2 text-sozna-accent hover:text-opacity-80 transition-colors font-medium">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  class="concept-icon w-4 h-4 transition-transform duration-200 group-open:rotate-90" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
+                >
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+                {concept.title}
+              </span>
+            </summary>
+            <div class="concept-content mt-3 pl-6 border-l-2 border-zinc-700 text-zinc-300">
+              <div class="prose prose-invert prose-sm max-w-none">
+                <ConceptContent />
+              </div>
+            </div>
+          </details>
+        );
+      }
+      
+      return null;
+    })}
   </article>
 
   <nav class="mt-16 pt-8 border-t border-zinc-800 flex justify-between text-sm font-sans">
@@ -77,3 +151,13 @@ const { Content } = await entry.render();
     </div>
   </nav>
 </Layout>
+
+<style>
+  .concept-summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  .concept-dropdown[open] .concept-icon {
+    transform: rotate(90deg);
+  }
+</style>

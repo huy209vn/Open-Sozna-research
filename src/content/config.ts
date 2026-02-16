@@ -10,6 +10,14 @@ const entriesCollection = defineCollection({
   }),
 });
 
+const conceptsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
 export const collections = {
   'entries': entriesCollection,
+  'concepts': conceptsCollection,
 };
