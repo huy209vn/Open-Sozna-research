@@ -1,0 +1,80 @@
+/* Custom Scrollbar for Webkit browsers */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272a; 
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46; 
+}
+
+/* Ensure Katex looks good in dark mode */
+.katex {
+  font-size: 1.1em;
+  color: inherit !important;
+}
+
+/* Typography Overrides */
+.prose {
+  max-width: 65ch;
+  color: #d4d4d8; /* zinc-300 */
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #f4f4f5; /* zinc-100 */
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.prose h1 {
+  font-weight: 700;
+}
+
+.prose p {
+  line-height: 1.75;
+  margin-bottom: 1.5em;
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.125rem; /* 18px */
+}
+
+.prose a {
+  color: #f59e0b;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.prose a:hover {
+  border-bottom-color: #f59e0b;
+}
+
+.prose strong {
+  color: #f4f4f5;
+  font-weight: 600;
+}
+
+.prose code {
+  color: #f59e0b;
+  background-color: #27272a;
+  padding: 0.1em 0.3em;
+  border-radius: 0.2em;
+  font-family: 'JetBrains Mono', monospace; /* Or system monospace */
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background-color: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}

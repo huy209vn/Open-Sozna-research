@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('entries');
+  // Sort entries by date desc
+  const sortedEntries = entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  
+  return sortedEntries.map((entry, index) => ({
+    params: { slug: entry.slug },
+    props: { 
+      entry,
+      nextEntry: index > 0 ? sortedEntries[index - 1] : null,
+      prevEntry: index < sortedEntries.length - 1 ? sortedEntries[index + 1] : null,
+    },
+  }));
+}
+
+const { entry, nextEntry, prevEntry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={entry.data.title} currentSlug={entry.slug}>
+  <header class="mb-12">
+    <div class="flex items-center gap-4 text-xs font-sans text-zinc-500 mb-6 uppercase tracking-wider">
+      <time datetime={entry.data.date.toISOString()}>
+        {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+      <div class="flex gap-2">
+        {entry.data.tags.map(tag => (
+          <a href={`/tags/${tag}`} class="bg-zinc-800 text-zinc-400 hover:text-white px-2 py-0.5 rounded transition-colors">
+            {tag}
+          </a>
+        ))}
+      </div>
+    </div>
+    
+    <h1 class="text-4xl md:text-5xl font-sans font-bold text-sozna-heading leading-tight mb-4">
+      {entry.data.title}
+    </h1>
+    
+    {entry.data.subtitle && (
+      <p class="text-xl md:text-2xl font-serif text-zinc-400 italic font-light leading-relaxed">
+        {entry.data.subtitle}
+      </p>
+    )}
+  </header>
+
+  <article class="prose prose-invert prose-lg max-w-none font-serif">
+    <Content />
+  </article>
+
+  <nav class="mt-16 pt-8 border-t border-zinc-800 flex justify-between text-sm font-sans">
+    <div class="w-1/2 pr-4">
+      {prevEntry && (
+        <a href={`/entries/${prevEntry.slug}`} class="text-zinc-500 hover:text-sozna-accent transition-colors flex flex-col items-start gap-1 group text-left">
+          <span class="text-xs uppercase tracking-wider text-zinc-600 group-hover:text-sozna-accent">Previous</span>
+          <span class="font-medium line-clamp-1">{prevEntry.data.title}</span>
+        </a>
+      )}
+    </div>
+    
+    <div class="w-1/2 pl-4 flex justify-end">
+      {nextEntry && (
+        <a href={`/entries/${nextEntry.slug}`} class="text-zinc-500 hover:text-sozna-accent transition-colors flex flex-col items-end gap-1 group text-right">
+          <span class="text-xs uppercase tracking-wider text-zinc-600 group-hover:text-sozna-accent">Next</span>
+          <span class="font-medium line-clamp-1">{nextEntry.data.title}</span>
+        </a>
+      )}
+    </div>
+  </nav>
+</Layout>

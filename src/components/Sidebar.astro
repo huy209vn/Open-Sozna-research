@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+
+const { activeTag, currentSlug } = Astro.props;
+
+const allEntries = await getCollection('entries');
+const sortedEntries = allEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Get all unique tags
+const allTags = [...new Set(allEntries.flatMap(entry => entry.data.tags))].sort();
+
+// Filter entries if a tag is active
+const displayedEntries = activeTag 
+  ? sortedEntries.filter(entry => entry.data.tags.includes(activeTag))
+  : sortedEntries;
+---
+
+<aside class="w-full md:w-64 md:h-screen bg-sozna-sidebar border-r border-zinc-800 flex flex-col md:fixed md:left-0 md:top-0 overflow-y-auto z-10">
+  <div class="p-6">
+    <a href="/" class="block">
+      <h1 class="font-sans text-xl font-bold text-sozna-heading tracking-tight hover:text-sozna-accent transition-colors">
+        Open Sozna<br/>Research
+      </h1>
+    </a>
+    <p class="mt-2 text-xs text-zinc-500 font-sans">A living theory of mind.</p>
+  </div>
+
+  <nav class="flex-1 px-4 pb-6">
+    {/* Tags Section */}
+    <div class="mb-8">
+      <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">Filter by Tag</h2>
+      <div class="flex flex-wrap gap-2">
+        <a 
+          href="/" 
+          class={`text-xs px-2 py-1 rounded transition-colors ${!activeTag ? 'bg-sozna-accent text-zinc-900 font-medium' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}`}
+        >
+          All
+        </a>
+        {allTags.map(tag => (
+          <a 
+            href={`/tags/${tag}`}
+            class={`text-xs px-2 py-1 rounded transition-colors ${activeTag === tag ? 'bg-sozna-accent text-zinc-900 font-medium' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}`}
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    {/* Entries List */}
+    <div>
+      <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">
+        {activeTag ? `${activeTag} Entries` : 'Recent Entries'}
+      </h2>
+      <ul class="space-y-3">
+        {displayedEntries.map(entry => (
+          <li>
+            <a 
+              href={activeTag ? `/tags/${activeTag}/${entry.slug}` : `/entries/${entry.slug}`} 
+              class={`block group ${currentSlug === entry.slug ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
+            >
+              <span class={`block text-sm font-medium transition-colors ${currentSlug === entry.slug ? 'text-sozna-accent' : 'text-sozna-text group-hover:text-sozna-heading'}`}>
+                {entry.data.title}
+              </span>
+              <span class="block text-xs text-zinc-500 mt-0.5 font-sans">
+                {entry.data.date.toISOString().split('T')[0]}
+              </span>
+            </a>
+          </li>
+        ))}
+        {displayedEntries.length === 0 && (
+          <li class="text-xs text-zinc-500 italic">No entries found.</li>
+        )}
+      </ul>
+    </div>
+  </nav>
+</aside>
