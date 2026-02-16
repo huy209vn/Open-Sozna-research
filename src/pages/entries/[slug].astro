@@ -130,33 +130,7 @@ if (lastIndex < rawContent.length) {
     })}
   </article>
 
-  {/* Reactions */}
-  <div class="mt-12 pt-8 border-t border-zinc-800/50">
-    <div class="flex items-center gap-6">
-      <span class="text-xs font-sans text-zinc-500 uppercase tracking-wider">React</span>
-      <div class="flex items-center gap-3">
-        <lyket-widget
-          namespace="open-sozna"
-          id={`${entry.slug}-fire`}
-          template="like"
-        >
-          <button class="text-2xl hover:scale-110 transition-transform" title="Resonates">🔥</button>
-        </lyket-widget>
-        <lyket-widget
-          namespace="open-sozna"
-          id={`${entry.slug}-thinking`}
-          template="like"
-        >
-          <button class="text-2xl hover:scale-110 transition-transform" title="Need more">🤔</button>
-        </lyket-widget>
-        <lyket-widget
-          namespace="open-sozna"
-          id={`${entry.slug}-learned`}
-          template="like"
-        >
-          <button class="text-2xl hover:scale-110 transition-transform" title="Learned something">💡</button>
-        </lyket-widget>
-  </div>
+
 
   {/* Feedback */}
   <div class="mt-6">
