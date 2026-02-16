@@ -133,9 +133,16 @@ if (lastIndex < rawContent.length) {
 
 
   {/* Feedback */}
-  <div class="mt-6">
-    <a href={`https://tally.so/r/BzkOe1?entry=${encodeURIComponent(entry.data.title)}&slug=${entry.slug}`} class="text-xs text-zinc-500 hover:text-sozna-accent transition-colors font-sans">
-      Have feedback? Tell me what was confusing or what to write next →
+  <div class="mt-8 p-4 border border-zinc-700/50 rounded-lg bg-zinc-800/20">
+    <h3 class="text-sm font-medium text-sozna-heading mb-2">Help shape this research</h3>
+    <p class="text-sm text-zinc-400 mb-3">
+      What confused you? What should I write next? Your feedback directly guides the next entry.
+    </p>
+    <a 
+      href={`https://tally.so/r/BzkOe1?entry=${encodeURIComponent(entry.data.title)}&slug=${entry.slug}`} 
+      class="inline-flex items-center justify-center px-4 py-2 bg-sozna-accent text-zinc-900 text-sm font-medium rounded hover:bg-opacity-90 transition-colors font-sans"
+    >
+      Share feedback & ideas →
     </a>
   </div>
 

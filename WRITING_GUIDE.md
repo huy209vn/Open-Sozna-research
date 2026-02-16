@@ -131,7 +131,39 @@ Tags are dynamic. You do not need to "create" a tag anywhere else.
     2.  Create a dedicated page at `/tags/new-topic`.
     3.  Group all entries with this tag together.
 
-## 8. Previewing Locally
+## 8. Feedback & Reader Engagement
+
+Every entry has a feedback form at the bottom (linked to Tally). Readers can:
+- Report what's confusing
+- Suggest what to write next
+- Vote on which concept to explore
+
+### Creating Custom Polls/Votes
+
+To add a poll to an entry, create a new Tally form and embed it:
+
+1. Go to **tally.so** and create a new form
+2. Add questions (multiple choice, rating, text, etc.)
+3. Get the form URL
+4. Add a link in your entry:
+
+```markdown
+[Vote: What should I tackle next?](YOUR_TALLY_URL)
+```
+
+### Tally Form Types You Can Use
+
+| Use Case | Question Type | Example |
+|----------|--------------|---------|
+| **Next topic vote** | Multiple choice | "What concept next: A, B, or C?" |
+| **Clarity check** | Rating 1-5 | "How clear was this section?" |
+| **Background check** | Multiple choice | "Your math level: None / Some / Advanced" |
+| **Crowdsource solutions** | Text + Multiple choice | "What's the best approach to X?" |
+| **Entry preferences** | Ranking | "Rank these topics by interest" |
+
+**Note:** Tally doesn't auto-email you on submissions. Check your Tally dashboard regularly, or set up Zapier to send notifications to your email/Discord.
+
+## 9. Previewing Locally
 
 To see your changes as you write:
 
