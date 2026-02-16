@@ -73,6 +73,14 @@ const { title, activeTag, currentSlug } = Astro.props;
     </script>
     
     <!-- Lyket for reactions -->
-    <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=st_36d07f37d192758d8e7c5597ea9236"></script>
+    <script>
+      // Load Lyket after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        var script = document.createElement('script');
+        script.src = 'https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=st_36d07f37d192758d8e7c5597ea9236';
+        script.async = true;
+        document.body.appendChild(script);
+      });
+    </script>
   </body>
 </html>
