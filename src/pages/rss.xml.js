@@ -13,7 +13,7 @@ export async function GET(context) {
       title: entry.data.title,
       pubDate: entry.data.date,
       description: entry.data.subtitle || '',
-      link: `/entries/${entry.slug}/`,
+      link: `/Open-Sozna-research/entries/${entry.slug}/`,
     })),
     customData: `<language>en-us</language>`,
   });
