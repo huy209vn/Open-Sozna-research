@@ -41,10 +41,10 @@ The easiest way to add images is to place them in the `public/images/` folder.
 2.  Reference it in your Markdown like this:
 
     ```markdown
-    ![Diagram of a neural network](/images/neural-network.png)
+    ![Diagram of a neural network](/Open-Sozna-research/images/neural-network.png)
     ```
 
-    *Note: Notice the path starts with `/images/`, not `public/images/`.*
+    *Note: The path must include your repository name (`/Open-Sozna-research/images/`) for GitHub Pages compatibility.*
 
 ## 4. Mathematics (LaTeX)
 

@@ -42,11 +42,11 @@ $$
 
 To add an image:
 1.  Place the image file in the `public/images/` folder.
-2.  Reference it using standard Markdown syntax: `![Alt Text](/images/filename.png)`.
+2.  Reference it using standard Markdown syntax: `![Alt Text](/Open-Sozna-research/images/filename.png)`.
 
 *Example: A majestic cat demonstrating the `public/images/` workflow.*
 
-![A very round cat](/images/fat-cat.jpg)
+![A very round cat](/Open-Sozna-research/images/fat-cat.jpg)
 
 ## 3. Code Blocks
 
