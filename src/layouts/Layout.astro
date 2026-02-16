@@ -28,6 +28,9 @@ const { title, activeTag, currentSlug } = Astro.props;
     
     <!-- follow.it verification -->
     <meta name="follow.it-verification-code" content="p4qtMHESMKe3EHxJ8fYW"/>
+    
+    <!-- Lyket reactions -->
+    <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_61fc0165c5ceab7db3274e369540d6"></script>
   </head>
   <body class="bg-sozna-bg text-sozna-text font-serif min-h-screen selection:bg-sozna-accent selection:text-white">
     
@@ -73,17 +76,6 @@ const { title, activeTag, currentSlug } = Astro.props;
 
       btn?.addEventListener('click', toggleSidebar);
       overlay?.addEventListener('click', toggleSidebar);
-    </script>
-    
-    <!-- Lyket reactions -->
-    <script>
-      (function() {
-        var script = document.createElement('script');
-        script.src = 'https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_61fc0165c5ceab7db3274e369540d6';
-        script.async = true;
-        script.defer = true;
-        document.head.appendChild(script);
-      })();
     </script>
   </body>
 </html>
