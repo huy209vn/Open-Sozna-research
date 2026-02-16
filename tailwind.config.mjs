@@ -6,14 +6,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'sozna-bg': '#18181b', // zinc-900
-        'sozna-sidebar': '#09090b', // zinc-950
-        'sozna-text': '#d4d4d8', // zinc-300
-        'sozna-heading': '#f4f4f5', // zinc-100
-        'sozna-accent': '#f59e0b', // amber-500
-        'sozna-accent-hover': '#fbbf24', // amber-400
-        'sozna-tag': '#27272a', // zinc-800
-        'sozna-tag-hover': '#3f3f46', // zinc-700
+        'sozna-bg': '#1a1a2e', // deep purple-black
+        'sozna-sidebar': '#0f0f1a', // darker purple-black
+        'sozna-text': '#b8b8c8', // soft lavender-gray
+        'sozna-heading': '#e4e4f0', // soft white-purple
+        'sozna-accent': '#9d8ec4', // muted lavender purple
+        'sozna-accent-hover': '#b8a9c9', // lighter lavender
+        'sozna-tag': '#2a2a3e', // dark purple-gray
+        'sozna-tag-hover': '#3a3a4e', // lighter purple-gray
       },
       fontFamily: {
         serif: ['"Crimson Pro"', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
