@@ -162,7 +162,7 @@ if (lastIndex < rawContent.length) {
 
   {/* Feedback */}
   <div class="mt-6">
-    <a href="https://tally.so/r/BzkOe1" class="text-xs text-zinc-500 hover:text-sozna-accent transition-colors font-sans">
+    <a href={`https://tally.so/r/BzkOe1?entry=${encodeURIComponent(entry.data.title)}&slug=${entry.slug}`} class="text-xs text-zinc-500 hover:text-sozna-accent transition-colors font-sans">
       Have feedback? Tell me what was confusing or what to write next →
     </a>
   </div>
