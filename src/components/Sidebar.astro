@@ -17,7 +17,7 @@ const displayedEntries = activeTag
 
 <aside class="w-full md:w-64 md:h-screen bg-sozna-sidebar border-r border-zinc-800 flex flex-col md:fixed md:left-0 md:top-0 overflow-y-auto z-10">
   <div class="p-6">
-    <a href="/" class="block">
+    <a href="/Open-Sozna-research/" class="block">
       <h1 class="font-sans text-xl font-bold text-sozna-heading tracking-tight hover:text-sozna-accent transition-colors">
         Open Sozna<br/>Research
       </h1>
@@ -31,14 +31,14 @@ const displayedEntries = activeTag
       <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">Filter by Tag</h2>
       <div class="flex flex-wrap gap-2">
         <a 
-          href="/" 
+          href="/Open-Sozna-research/" 
           class={`text-xs px-2 py-1 rounded transition-colors ${!activeTag ? 'bg-sozna-accent text-zinc-900 font-medium' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}`}
         >
           All
         </a>
         {allTags.map(tag => (
           <a 
-            href={`/tags/${tag}`}
+            href={`/Open-Sozna-research/tags/${tag}`}
             class={`text-xs px-2 py-1 rounded transition-colors ${activeTag === tag ? 'bg-sozna-accent text-zinc-900 font-medium' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}`}
           >
             {tag}
@@ -56,7 +56,7 @@ const displayedEntries = activeTag
         {displayedEntries.map(entry => (
           <li>
             <a 
-              href={activeTag ? `/tags/${activeTag}/${entry.slug}` : `/entries/${entry.slug}`} 
+              href={activeTag ? `/Open-Sozna-research/tags/${activeTag}/${entry.slug}` : `/Open-Sozna-research/entries/${entry.slug}`} 
               class={`block group ${currentSlug === entry.slug ? 'opacity-100' : 'opacity-70 hover:opacity-100'}`}
             >
               <span class={`block text-sm font-medium transition-colors ${currentSlug === entry.slug ? 'text-sozna-accent' : 'text-sozna-text group-hover:text-sozna-heading'}`}>
