@@ -2,20 +2,20 @@
 title: "IIT (Integrated Information Theory)"
 ---
 
-Honestly? I don't fully understand IIT. I've tried reading Tononi's papers and they're dense in that specific academic way — every sentence compressed, every term pre-defined by reference to another paper you haven't read.
+I don't fully understand IIT. I've tried reading relevant papers and they're dense in that specific academic way — every sentence compressed, referring to papers you haven't read.
 
-But here's what I *think* I get:
+But here's what I think I get, and what I think is actually useful:
 
-IIT tries to assign a number — **phi (Φ)** — to consciousness. The intuition is something like: *how much more is the system than the sum of its parts?* If you have a bunch of independent things doing their own thing, phi is low. If they're integrated into something unified, phi is high.
+The core intuition is: **human consciousness can't be partitioned into its parts without destroying the thing**. You can't slice up a mind and still have a mind. The whole is genuinely different from the sum of parts. That's... probably true? It feels true. If you separate my visual cortex from my prefrontal cortex, you don't get "me but in two places." You get damage. You get something else, something less.
 
-A camera sensor: million pixels, independent. Low phi. Your brain: everything talking to everything, bound together into one experience. High phi.
+So the idea of **integrated information** — that consciousness requires parts to be genuinely connected, not just adjacent — that seems right. It's a constraint on any theory. If you're building something and it doesn't have this property, it's probably not conscious in the way humans are.
 
-**But here's my problem:** No one can actually calculate phi for a real brain. It's computationally intractable. So you have this theory that claims to measure consciousness, but you can't use it to measure anything interesting.
+**But phi?** The actual number?
 
-And even if you *could* calculate it... then what? You'd know this system has phi=3.2 and that one has phi=5.1. Okay. But does that tell you **how to build** a conscious system? Does it tell you what makes consciousness *work*, not just *exist*?
+That's where it gets weird. Phi is supposed to measure *how much* integration. But no one can calculate it for real systems. And even if they could — what do you do with "this has phi=3.2"? Does it tell you **how to build** it? Does it tell you the architecture, the mechanism, the energy flows, the developmental process?
 
-IIT feels like it's measuring a symptom. Like taking the temperature of a patient and declaring you understand medicine. Yeah, fever tells you something's wrong. But what's the mechanism? What's the process? How do you *fix* it or *build* it?
+It doesn't. It's like... you discover that bridges need tension and compression, and then you invent a number that measures "bridgeness," but you still don't know how to actually build a bridge that stays up.
 
-For living systems — for actually understanding how minds work, how they become human, how they develop and change — phi feels underwhelming. It's one number. Consciousness isn't one thing. It's intelligence, emotion, memory, agency, a sense of self, all developing over time, all interdependent.
+IIT feels like it identified one necessary condition (integration) and then tried to turn that into a sufficient theory. But consciousness isn't just one thing. It's intelligence, emotion, memory, agency, selfhood, all developing over time, all requiring *architecture* not just *information*.
 
-Maybe I'm missing something. Probably am. But IIT doesn't feel like the framework that's going to help me build what I'm trying to build.
+So yeah. The integration part matters. The "can't be partitioned" part matters. But phi as your plan for building a mind? That feels backwards. You need to understand the mechanism first. Then maybe you can measure it. Not the other way around.
