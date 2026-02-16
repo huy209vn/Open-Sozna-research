@@ -30,7 +30,7 @@ subtitle: "Why functionalism fails to explain qualia."
 *   **`date`** (Required): The date of publication in `YYYY-MM-DD` format. Used for sorting.
 *   **`tags`** (Required): A list of tags. These automatically generate filter pages.
     *   Format: `["tag1", "tag2"]`
-    *   *Note: Tags are case-sensitive. "Meta" and "meta" will be treated as different tags.*
+    *   *Note: Tags are case-sensitive. "Meta" and "meta" will be treated as different tags. Tags in the sidebar show the count of entries for each tag in parentheses.*
 *   **`subtitle`** (Optional): A secondary headline displayed in a serif italic font below the title.
 
 ## 3. Adding Images
@@ -45,6 +45,18 @@ The easiest way to add images is to place them in the `public/images/` folder.
     ```
 
     *Note: The path must include your repository name (`/Open-Sozna-research/images/`) for GitHub Pages compatibility.*
+
+## Site Structure
+
+- **Homepage (`/`)**: A minimal landing page with your name, description, and a link to start reading.
+- **Entries list (`/entries`)**: A page listing all research entries.
+- **Individual entries (`/entries/[slug]`)**: Full entry pages with navigation.
+- **Tag pages (`/tags/[tag]`)**: Filtered views of entries by tag.
+
+The sidebar shows:
+- Tag filters with entry counts (e.g., `consciousness (3)`)
+- Recent entries (up to 5)
+- A link to view all entries
 
 ## 4. Mathematics (LaTeX)
 

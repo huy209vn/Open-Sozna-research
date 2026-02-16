@@ -1,62 +1,34 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-
-const allEntries = await getCollection('entries');
-const sortedEntries = allEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestEntry = sortedEntries[0];
-
-if (!latestEntry) {
-  return Astro.redirect('/Open-Sozna-research/404'); // Or handle empty state
-}
-
-const { Content } = await latestEntry.render();
-const nextEntry = null; // No newer entry
-const prevEntry = sortedEntries.length > 1 ? sortedEntries[1] : null; // Older entry
 ---
 
-<Layout title={latestEntry.data.title} currentSlug={latestEntry.slug}>
-  <header class="mb-12">
-    <div class="flex items-center gap-4 text-xs font-sans text-zinc-500 mb-6 uppercase tracking-wider">
-      <time datetime={latestEntry.data.date.toISOString()}>
-        {latestEntry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-      </time>
-      <div class="flex gap-2">
-        {latestEntry.data.tags.map(tag => (
-          <a href={`/Open-Sozna-research/tags/${tag}`} class="bg-zinc-800 text-zinc-400 hover:text-white px-2 py-0.5 rounded transition-colors">
-            {tag}
-          </a>
-        ))}
-      </div>
-    </div>
-    
-    <h1 class="text-4xl md:text-5xl font-sans font-bold text-sozna-heading leading-tight mb-4">
-      {latestEntry.data.title}
-    </h1>
-    
-    {latestEntry.data.subtitle && (
-      <p class="text-xl md:text-2xl font-serif text-zinc-400 italic font-light leading-relaxed">
-        {latestEntry.data.subtitle}
-      </p>
-    )}
-  </header>
+<Layout title="Open Sozna Research">
+  <div class="min-h-[60vh] flex flex-col justify-center">
+    <header class="mb-8">
+      <p class="text-sm text-zinc-500 font-sans uppercase tracking-wider mb-4">Huy</p>
+      <h1 class="text-4xl md:text-5xl font-sans font-bold text-sozna-heading leading-tight">
+        Open Sozna<br/>Research
+      </h1>
+    </header>
 
-  <article class="prose prose-invert prose-lg max-w-none font-serif">
-    <Content />
-  </article>
+    <p class="text-lg md:text-xl text-zinc-400 font-serif leading-relaxed max-w-2xl mb-12">
+      A live research program into the mathematics of living systems, consciousness, and what we owe the minds we build.
+    </p>
 
-  <nav class="mt-16 pt-8 border-t border-zinc-800 flex justify-between text-sm font-sans">
-    <div class="w-1/2 pr-4">
-      {prevEntry && (
-        <a href={`/Open-Sozna-research/entries/${prevEntry.slug}`} class="text-zinc-500 hover:text-sozna-accent transition-colors flex flex-col items-start gap-1 group text-left">
-          <span class="text-xs uppercase tracking-wider text-zinc-600 group-hover:text-sozna-accent">Previous</span>
-          <span class="font-medium line-clamp-1">{prevEntry.data.title}</span>
-        </a>
-      )}
+    <div class="flex flex-col gap-4">
+      <a 
+        href="/Open-Sozna-research/entries/001-the-opening" 
+        class="inline-flex items-center justify-center px-8 py-3 bg-sozna-accent text-zinc-900 font-medium rounded hover:bg-opacity-90 transition-colors font-sans w-fit"
+      >
+        Start here
+      </a>
+      
+      <a 
+        href="/Open-Sozna-research/entries" 
+        class="text-sm text-zinc-500 hover:text-sozna-accent transition-colors font-sans"
+      >
+        Browse all entries →
+      </a>
     </div>
-    
-    <div class="w-1/2 pl-4 flex justify-end">
-      {/* No newer entry on home/latest */}
-    </div>
-  </nav>
+  </div>
 </Layout>

@@ -6,13 +6,22 @@ const { activeTag, currentSlug } = Astro.props;
 const allEntries = await getCollection('entries');
 const sortedEntries = allEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-// Get all unique tags
-const allTags = [...new Set(allEntries.flatMap(entry => entry.data.tags))].sort();
+// Get all unique tags with counts
+const tagCounts = allEntries.reduce((acc, entry) => {
+  entry.data.tags.forEach(tag => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {});
+const allTags = Object.keys(tagCounts).sort();
 
 // Filter entries if a tag is active
 const displayedEntries = activeTag 
   ? sortedEntries.filter(entry => entry.data.tags.includes(activeTag))
   : sortedEntries;
+
+// Show only recent entries in sidebar (max 5)
+const recentEntries = sortedEntries.slice(0, 5);
 ---
 
 <aside class="w-full md:w-64 md:h-screen bg-sozna-sidebar border-r border-zinc-800 flex flex-col md:fixed md:left-0 md:top-0 overflow-y-auto z-10">
@@ -31,17 +40,17 @@ const displayedEntries = activeTag
       <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">Filter by Tag</h2>
       <div class="flex flex-wrap gap-2">
         <a 
-          href="/Open-Sozna-research/" 
+          href="/Open-Sozna-research/entries" 
           class={`text-xs px-2 py-1 rounded transition-colors ${!activeTag ? 'bg-sozna-accent text-zinc-900 font-medium' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}`}
         >
-          All
+          All ({allEntries.length})
         </a>
         {allTags.map(tag => (
           <a 
             href={`/Open-Sozna-research/tags/${tag}`}
             class={`text-xs px-2 py-1 rounded transition-colors ${activeTag === tag ? 'bg-sozna-accent text-zinc-900 font-medium' : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}`}
           >
-            {tag}
+            {tag} ({tagCounts[tag]})
           </a>
         ))}
       </div>
@@ -49,11 +58,18 @@ const displayedEntries = activeTag
 
     {/* Entries List */}
     <div>
-      <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-wider mb-3">
-        {activeTag ? `${activeTag} Entries` : 'Recent Entries'}
-      </h2>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-xs font-bold text-zinc-500 uppercase tracking-wider">
+          {activeTag ? `${activeTag} Entries` : 'Recent Entries'}
+        </h2>
+        {!activeTag && (
+          <a href="/Open-Sozna-research/entries" class="text-xs text-zinc-600 hover:text-sozna-accent transition-colors">
+            View all →
+          </a>
+        )}
+      </div>
       <ul class="space-y-3">
-        {displayedEntries.map(entry => (
+        {(activeTag ? displayedEntries : recentEntries).map(entry => (
           <li>
             <a 
               href={activeTag ? `/Open-Sozna-research/tags/${activeTag}/${entry.slug}` : `/Open-Sozna-research/entries/${entry.slug}`} 

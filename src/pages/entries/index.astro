@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allEntries = await getCollection('entries');
+const sortedEntries = allEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="All Entries">
+  <header class="mb-12">
+    <h1 class="text-3xl md:text-4xl font-sans font-bold text-sozna-heading mb-4">
+      All Entries
+    </h1>
+    <p class="text-zinc-400 font-serif">
+      {sortedEntries.length} {sortedEntries.length === 1 ? 'entry' : 'entries'} in the research log.
+    </p>
+  </header>
+
+  <div class="space-y-8">
+    {sortedEntries.map(entry => (
+      <article class="border-b border-zinc-800 pb-8 last:border-0">
+        <div class="flex items-center gap-3 text-xs font-sans text-zinc-500 mb-3 uppercase tracking-wider">
+          <time datetime={entry.data.date.toISOString()}>
+            {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          <span class="text-zinc-700">•</span>
+          <div class="flex gap-2">
+            {entry.data.tags.map(tag => (
+              <a href={`/Open-Sozna-research/tags/${tag}`} class="hover:text-sozna-accent transition-colors">
+                {tag}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <h2 class="text-xl md:text-2xl font-sans font-semibold mb-2">
+          <a href={`/Open-Sozna-research/entries/${entry.slug}`} class="text-sozna-heading hover:text-sozna-accent transition-colors">
+            {entry.data.title}
+          </a>
+        </h2>
+
+        {entry.data.subtitle && (
+          <p class="text-zinc-400 font-serif italic">
+            {entry.data.subtitle}
+          </p>
+        )}
+      </article>
+    ))}
+  </div>
+</Layout>
