@@ -60,7 +60,9 @@ The sidebar shows:
 
 ## 4. Concept Dropdowns
 
-You can embed reusable concept explanations in any entry using the `:::concept` directive:
+You can embed reusable concept explanations in any entry using the `:::concept` directive. Use these when you hit a point where the reader needs background to follow your argument — don't force them, let them flow naturally.
+
+### Syntax
 
 ```markdown
 This relates to the idea of dynamical systems.
@@ -70,6 +72,8 @@ This relates to the idea of dynamical systems.
 
 Continuing with the main text...
 ```
+
+**Important:** The syntax is exact — three colons, `concept`, the name in quotes, then three colons on a new line.
 
 ### How it works:
 1. Create a concept file in `src/content/concepts/` (e.g., `manifold.md`)
@@ -84,9 +88,7 @@ Continuing with the main text...
 title: "Manifold"
 ---
 
-A **manifold** is a topological space that locally resembles Euclidean space near each point.
-
-An $n$-dimensional manifold satisfies...
+[Write your explanation here — your voice, your understanding, wrong turns and all.]
 ```
 
 Concepts are shared across entries — define once, reference anywhere.
